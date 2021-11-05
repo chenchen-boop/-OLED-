@@ -1,0 +1,44 @@
+#include <Wire.h>
+#include "SSD1306Wire.h"
+
+
+
+//int X ;
+SSD1306Wire  display(0x3c, 21, 22);
+
+String x;
+
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(13,INPUT);
+  //ledcSetup(0,5000,8);
+  //ledcAttachPin()
+
+
+  display.init();  //螢幕初始化
+  display.clear();  //清空畫面
+ 
+  //display.flipScreenVertically();
+  
+}
+
+
+void loop() {
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(0,0,"value");
+  display.display();
+
+ 
+  x= String(analogRead(13),DEC);
+  Serial.println(x);
+  display.setFont(ArialMT_Plain_24);
+  display.drawString(0,30,x);
+  display.display();
+  //delay(100);
+  display.clear();  //清空畫面
+  
+
+
+  
+}
